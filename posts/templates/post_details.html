@@ -8,7 +8,7 @@
             <h1 class="card-title">{{post.title}}</h1>
             <p class="card-text">{{post.description}}</p>
             <p>Author : {{post.author.first_name}} {{post.author.last_name}}</p>
-             <p>Quantity : {{post.attendance_quantity}}</p>
+             <p>Total Attendees : {{post.attendance_quantity}}</p>
             <p>
                 Category : {% for cat in post.category.all %}
                

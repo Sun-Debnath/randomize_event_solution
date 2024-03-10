@@ -22,31 +22,31 @@ from django.urls import reverse_lazy
 #         author_form = forms.AuthorForm()
 #     return render(request, 'add_author.html', {'form' : author_form})
 
-# def register(request):
-#     if request.method == 'POST':
-#         register_form = forms.RegistrationForm(request.POST)
-#         if register_form.is_valid():
-#             register_form.save()
-#             messages.success(request, 'Account Created Successfully')
-#             return redirect('register')
+def register(request):
+    if request.method == 'POST':
+        register_form = forms.RegistrationForm(request.POST)
+        if register_form.is_valid():
+            register_form.save()
+            messages.success(request, 'Account Created Successfully')
+            return redirect('register')
     
-#     else:
-#         register_form = forms.RegistrationForm()
-#     return render(request, 'register.html', {'form' : register_form, 'type' : 'Register'})
+    else:
+        register_form = forms.RegistrationForm()
+    return render(request, 'register.html', {'form' : register_form, 'type' : 'Register'})
 
-class RegistrationView(CreateView):
-    model = User
-    form_class = forms.RegistrationForm
-    template_name = 'register.html'
+# class RegistrationView(CreateView):
+#     model = User
+#     form_class = forms.RegistrationForm
+#     template_name = 'register.html'
 
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.set_password(self.object.password) 
-        self.object.save() 
-        Author.objects.create(user=self.object, organizer_or_not=form.cleaned_data['organizer_or_not'])
+#     def form_valid(self, form):
+#         self.object = form.save(commit=False)
+#         self.object.set_password(self.object.password) 
+#         self.object.save() 
+#         Author.objects.create(user=self.object, organizer_or_not=form.cleaned_data['organizer_or_not'])
 
-        login(self.request, self.object) 
-        return redirect('homepage')
+#         login(self.request, self.object) 
+#         return redirect('homepage')
 
 def user_login(request):
     if request.method == 'POST':
